@@ -1,0 +1,42 @@
+[
+  {
+    "symbol": "PYTHON",
+    "change": "+2.4%"
+  },
+  {
+    "symbol": "EXCEL",
+    "change": "+3.0%"
+  },
+  {
+    "symbol": "STATISTICS",
+    "change": "+3.3%"
+  },
+  {
+    "symbol": "ECONOMICS",
+    "change": "+3.7%"
+  },
+  {
+    "symbol": "FINANCE",
+    "change": "+4.1%"
+  },
+  {
+    "symbol": "RUNNING STREAK",
+    "change": "+100%"
+  },
+  {
+    "symbol": "PROBLEM SOLVING",
+    "change": "+2.9%"
+  },
+  {
+    "symbol": "TINKERING",
+    "change": "+5.0%"
+  },
+  {
+    "symbol": "DATA VISUAL",
+    "change": "+3.5%"
+  },
+  {
+    "symbol": "FOCUS",
+    "change": "+4.2%"
+  }
+]

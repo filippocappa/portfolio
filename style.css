@@ -1,0 +1,419 @@
+/* ============================================
+   DESIGN SYSTEM — Editorial Typography + Minimalist Brutalism
+   ============================================ */
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Custom Properties --- */
+:root {
+  --bg: #F4F4F0;
+  --text: #1A1A1A;
+  --accent: #F37021;
+  --serif: 'Playfair Display', 'Georgia', serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --page-padding: clamp(1.5rem, 5vw, 6rem);
+  --section-gap: clamp(4rem, 8vh, 10rem);
+}
+
+/* --- Base --- */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: var(--accent);
+  z-index: 9999;
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease;
+  opacity: 0;
+}
+
+.cursor-dot.visible {
+  opacity: 1;
+}
+
+.cursor-dot.hovering {
+  width: 48px;
+  height: 48px;
+}
+
+/* --- Utility --- */
+.mono-sm {
+  font-family: var(--mono);
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* --- Divider --- */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text);
+  opacity: 0.15;
+}
+
+/* ============================================
+   TOP META
+   ============================================ */
+.top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem var(--page-padding);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  padding: var(--section-gap) var(--page-padding);
+  gap: 2rem;
+  min-height: 70vh;
+}
+
+.hero-name h1 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(4rem, 14vw, 16rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.hero-subtitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  padding-bottom: 0.8rem;
+}
+
+/* ============================================
+   ABOUT / MANIFESTO
+   ============================================ */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: var(--section-gap) var(--page-padding);
+}
+
+.section-label {
+  padding-top: 0.3rem;
+}
+
+.manifesto {
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 2.5vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  max-width: 38ch;
+}
+
+/* ============================================
+   SELECTED WORK — Full-screen stacked panels
+   ============================================ */
+.work-section {
+  position: relative;
+}
+
+.work-section-label {
+  padding: var(--section-gap) var(--page-padding) 2rem;
+}
+
+.work-stack {
+  position: relative;
+}
+
+.work-panel {
+  display: block;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none;
+}
+
+/* First panel: light bg. Second panel: dark bg. Alternating. */
+.work-panel[data-index="01"] {
+  background-color: var(--bg);
+  color: var(--text);
+  z-index: 1;
+}
+
+.work-panel[data-index="02"] {
+  background-color: var(--text);
+  color: var(--bg);
+  z-index: 2;
+}
+
+.work-panel-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+  height: 100%;
+  padding: clamp(2rem, 5vw, 5rem) var(--page-padding);
+}
+
+.work-panel-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-top: 2rem;
+}
+
+.work-index {
+  opacity: 0.5;
+}
+
+.work-title {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 9vw, 10rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
+}
+
+.work-panel-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  padding-bottom: clamp(2rem, 5vw, 5rem);
+}
+
+.work-tags {
+  display: flex;
+  gap: 1rem;
+}
+
+.work-tags .mono-sm {
+  opacity: 0.5;
+}
+
+.work-desc {
+  opacity: 0.7;
+  line-height: 1.6;
+  max-width: 35ch;
+}
+
+.work-cta {
+  display: inline-block;
+  width: fit-content;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.work-panel[data-index="01"] .work-cta:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.work-panel[data-index="02"] .work-cta:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: var(--section-gap) var(--page-padding);
+}
+
+.contact-heading {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 8vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin-bottom: 2.5rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-link {
+  display: inline-block;
+  width: fit-content;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+  cursor: none;
+}
+
+.contact-link:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem var(--page-padding);
+  padding-bottom: 3rem;
+}
+
+.footer .mono-sm {
+  opacity: 0.5;
+}
+
+/* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero name reveal — clip animation */
+.hero-name h1 {
+  overflow: hidden;
+  padding-bottom: 0.1em;
+}
+
+.hero-name h1 .char-wrap {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-name h1 .char-wrap.visible {
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+
+  /* Restore default cursor on touch devices */
+  html, body, a, .work-panel, .contact-link {
+    cursor: auto;
+  }
+
+  .cursor-dot {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 50vh;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-subtitle {
+    align-items: flex-start;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .manifesto {
+    max-width: 100%;
+  }
+
+  .work-panel {
+    height: auto;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .work-panel-inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .work-panel-left {
+    height: auto;
+  }
+
+  .work-title {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}

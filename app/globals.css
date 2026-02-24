@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Reset */
+  * {
+    @apply m-0 p-0 box-border;
+  }
+
+  html {
+    @apply antialiased;
+    font-size: 16px;
+    cursor: none;
+  }
+
+  body {
+    @apply bg-cream text-charcoal font-mono overflow-x-hidden;
+    cursor: none;
+  }
+
+  ::selection {
+    @apply bg-accent text-cream;
+  }
+
+  a {
+    @apply no-underline;
+    cursor: none;
+  }
+}
+
+@layer components {
+  /* Scroll Progress Bar */
+  .scroll-progress {
+    @apply fixed top-0 left-0 h-[2px] w-0 bg-accent z-[9999];
+  }
+
+  /* Custom Cursor Dot */
+  .cursor-dot {
+    @apply fixed top-0 left-0 w-[10px] h-[10px] bg-accent rounded-full pointer-events-none z-[9998] opacity-0;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease;
+  }
+
+  .cursor-dot.visible {
+    @apply opacity-100;
+  }
+
+  .cursor-dot.hovering {
+    @apply w-12 h-12;
+  }
+
+  /* Divider */
+  .divider {
+    @apply w-full h-[1px] bg-charcoal opacity-15;
+  }
+
+  /* Mono Small Utility */
+  .mono-sm {
+    @apply font-mono text-mono-sm font-normal tracking-wider uppercase;
+  }
+
+  /* Hero Clip Reveal Animation */
+  .hero-name h1 {
+    @apply overflow-hidden pt-[0.15em] pb-[0.1em] pr-[0.1em];
+  }
+
+  .hero-name h1 .char-wrap {
+    @apply inline-block;
+    transform: translateY(105%);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-name h1 .char-wrap.visible {
+    transform: translateY(0);
+  }
+
+  /* Scroll Reveal */
+  .reveal {
+    @apply opacity-0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    @apply opacity-100;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  /* Custom cursor for hover devices */
+  @media (hover: hover) {
+    html, body, a, button {
+      cursor: none;
+    }
+  }
+
+  /* Restore cursor on mobile */
+  @media (max-width: 768px) {
+    html, body, a, button {
+      cursor: auto !important;
+    }
+    .cursor-dot {
+      @apply hidden;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%); /* Animate half the width of the duplicated content */
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 75s linear infinite; /* Adjusted duration */
+    width: fit-content; /* Ensure the animated content takes full width */
+  }
+}
