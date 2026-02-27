@@ -6,6 +6,7 @@ import ScrollProgress from '@/components/ScrollProgress'
 import SmoothScroll from '@/components/SmoothScroll'
 import StockTicker from '@/components/StockTicker'
 import PageTransition from '@/components/PageTransition'
+import CommandPalette from '@/components/CommandPalette'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -50,6 +51,7 @@ export default function RootLayout({
       <body>
         <StockTicker />
         <ScrollProgress />
+        <CommandPalette />
         <Cursor />
         <SmoothScroll>
           <PageTransition>

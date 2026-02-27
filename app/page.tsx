@@ -1,7 +1,10 @@
 import HeroReveal from '@/components/HeroReveal'
 import Link from 'next/link'
+import { getLatestCommitDate } from '@/lib/github'
 
-export default function Home() {
+export default async function Home() {
+  const commitDate = await getLatestCommitDate()
+
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
       {/* HERO */}
@@ -21,8 +24,8 @@ export default function Home() {
         <div className="pt-1">
           <span className="font-geist-mono text-mono-sm">001 — About</span>
         </div>
-        <div className="flex flex-col justify-center h-full"> {/* Added flex and justify-center */}
-          <p className="font-inter text-manifesto font-normal leading-relaxed tracking-tight max-w-[60ch]"> {/* Increased max-w and set font-inter */}
+        <div className="flex flex-col justify-center h-full">
+          <p className="font-inter text-manifesto font-normal leading-relaxed tracking-tight max-w-[60ch]">
             I believe the most interesting problems sit at the intersection of
             markets, mathematics, and human behaviour. I study economics not
             as theory but as a lens — sharpened by data, tested by code, and
@@ -69,14 +72,14 @@ export default function Home() {
         data-index="01"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
-          <div className="flex flex-col justify-between h-full pt-8">
+          <div className="flex flex-col justify-between h-full pt-8 pb-20">
             <span className="font-geist-mono text-mono-sm opacity-50">01</span>
             <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
               The<br />Running<br />Club
             </h2>
           </div>
-          <div className="flex flex-col justify-end gap-6 pb-20">
-            <div className="flex gap-4">
+          <div className="flex flex-col items-end gap-6 pb-20 text-right">
+            <div className="flex gap-4 justify-end">
               <span className="font-geist-mono text-mono-sm opacity-50">Community</span>
               <span className="font-geist-mono text-mono-sm opacity-50">Logistics</span>
             </div>
@@ -87,9 +90,10 @@ export default function Home() {
             <Link href="/work/running-club" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
               >
-                Read case study →
+                Read case study
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </span>
             </Link>
           </div>
@@ -102,14 +106,14 @@ export default function Home() {
         data-index="02"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
-          <div className="flex flex-col justify-between h-full pt-8">
+          <div className="flex flex-col justify-between h-full pt-8 pb-20">
             <span className="font-geist-mono text-mono-sm opacity-50">02</span>
             <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
               Financial<br />Modelling
             </h2>
           </div>
-          <div className="flex flex-col justify-end gap-6 pb-20">
-            <div className="flex gap-4">
+          <div className="flex flex-col items-end gap-6 pb-20 text-right">
+            <div className="flex gap-4 justify-end">
               <span className="font-geist-mono text-mono-sm opacity-50">Python</span>
               <span className="font-geist-mono text-mono-sm opacity-50">R</span>
             </div>
@@ -120,9 +124,10 @@ export default function Home() {
             <Link href="/work/financial-modelling" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
               >
-                Read case study →
+                Read case study
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </span>
             </Link>
           </div>
@@ -135,14 +140,14 @@ export default function Home() {
         data-index="03"
       >
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
-          <div className="flex flex-col justify-between h-full pt-8">
+          <div className="flex flex-col justify-between h-full pt-8 pb-20">
             <span className="font-geist-mono text-mono-sm opacity-50">03</span>
             <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
               Econometric<br />Analysis
             </h2>
           </div>
-          <div className="flex flex-col justify-end gap-6 pb-20">
-            <div className="flex gap-4">
+          <div className="flex flex-col items-end gap-6 pb-20 text-right">
+            <div className="flex gap-4 justify-end">
               <span className="font-geist-mono text-mono-sm opacity-50">Stata</span>
               <span className="font-geist-mono text-mono-sm opacity-50">R</span>
             </div>
@@ -152,9 +157,10 @@ export default function Home() {
             <Link href="/work/econometric-analysis" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
               >
-                Read case study →
+                Read case study
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
               </span>
             </Link>
           </div>
@@ -167,7 +173,7 @@ export default function Home() {
           <div>
             <span className="font-geist-mono text-mono-sm">003 — Contact</span>
           </div>
-          <div className="mb-4"> {/* Adjusted margin-bottom for better spacing */}
+          <div className="mb-4">
             <h2 className="font-inter-tight text-contact-heading font-black tracking-tight leading-tight mb-4">
               Let&apos;s talk.
             </h2>
@@ -176,8 +182,8 @@ export default function Home() {
             </p>
           </div>
         </div>
-        <div className="justify-self-end self-end"> {/* Retained self-end to push to bottom */}
-          <div className="flex flex-col gap-4">
+        <div className="justify-self-end self-end w-full max-w-md">
+          <div className="flex flex-col items-end gap-4">
             <a
               href="mailto:hello@filippocappa.com"
               data-cursor-magnetic
@@ -203,16 +209,15 @@ export default function Home() {
             >
               GitHub ↗
             </a>
-            <div className="mt-4 pt-4 border-t border-off-black/10">
+            <div className="mt-8 pt-8 border-t border-off-black/10 w-full flex justify-end">
               <a
                 href="/cv-filippo-cappa.pdf" 
                 download
-                className="relative z-10 group flex items-center gap-3 font-geist-mono text-sm px-4 py-2 bg-off-black text-cream rounded hover:bg-accent hover:text-off-black transition-all duration-300"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
                 data-cursor-magnetic
               >
-                <span className="opacity-50 group-hover:opacity-100">DATA_EXPORT:</span>
-                <span className="font-bold">DOWNLOAD_CV.PDF</span>
-                <span className="ml-auto opacity-30 group-hover:opacity-100 text-xs">↓</span>
+                Download CV
+                <span className="inline-block transition-transform duration-300 group-hover:translate-y-1">↓</span>
               </a>
             </div>
           </div>
@@ -221,10 +226,17 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer className="flex justify-between items-center px-page py-6 pb-12 bg-cream text-off-black">
-        <span className="font-geist-mono text-mono-sm opacity-50">© {new Date().getFullYear()} Filippo Cappa</span>
-        <span className="font-geist-mono text-mono-sm opacity-50">Built with discipline.</span>
+        <div className="flex items-center gap-6">
+          <span className="font-geist-mono text-mono-sm opacity-50">© {new Date().getFullYear()} Filippo Cappa</span>
+          {commitDate && (
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-emerald-green rounded-full animate-pulse shadow-[0_0_8px_#10B981]" />
+              <span className="font-geist-mono text-[9px] opacity-30 uppercase tracking-[0.2em]">Update: {commitDate}</span>
+            </div>
+          )}
+        </div>
+        <span className="font-geist-mono text-mono-sm opacity-50 uppercase tracking-widest">Built with rigor.</span>
       </footer>
     </main>
   )
 }
-
