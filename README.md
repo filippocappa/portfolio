@@ -67,12 +67,19 @@ The project is built using the **Next.js App Router**, leveraging modern React p
    cd portfolio
    ```
 
-2. **Install dependencies:**
+2. **Configure Environment Variables:**
+   Copy the `.env.example` file to `.env` and fill in your Strava and GitHub credentials.
+   ```bash
+   cp .env.example .env
+   ```
+   *Note:* To obtain your Strava `REFRESH_TOKEN`, you must authorize your application via Strava's OAuth flow once.
+
+3. **Install dependencies:**
    ```bash
    npm install
    ```
 
-3. **Run the development server:**
+4. **Run the development server:**
    ```bash
    npm run dev
    ```

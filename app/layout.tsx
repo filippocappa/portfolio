@@ -7,6 +7,7 @@ import SmoothScroll from '@/components/SmoothScroll'
 import StockTicker from '@/components/StockTicker'
 import PageTransition from '@/components/PageTransition'
 import CommandPalette from '@/components/CommandPalette'
+import Link from 'next/link'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -37,8 +38,16 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Filippo Cappa',
+  title: {
+    default: 'Filippo Cappa',
+    template: '%s | Filippo Cappa',
+  },
   description: 'Filippo Cappa — Economics with Finance & Data Science',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -48,11 +57,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${interTight.variable} ${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
-      <body>
+      <body className="overflow-x-hidden">
         <StockTicker />
         <ScrollProgress />
         <CommandPalette />
         <Cursor />
+
         <SmoothScroll>
           <PageTransition>
             {children}

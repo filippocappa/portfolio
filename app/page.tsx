@@ -2,6 +2,7 @@ import HeroReveal from '@/components/HeroReveal'
 import Link from 'next/link'
 import { getLatestCommitDate } from '@/lib/github'
 import ManifestoSection from '@/components/ManifestoSection'
+import HeroName from '@/components/HeroName'
 
 export default async function Home() {
   const commitDate = await getLatestCommitDate()
@@ -9,14 +10,18 @@ export default async function Home() {
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
       {/* HERO */}
-      <section className="h-screen w-full flex flex-col justify-start items-start px-page pt-32 snap-center bg-cream text-off-black">
-        <div className="hero-name">
-          <h1 className="font-inter-tight text-[22vw] leading-[0.75] tracking-[-0.08em] font-semibold">
-            <HeroReveal delay={0}>Filippo</HeroReveal>
-          </h1>
-          <h1 className="font-inter-tight text-[22vw] leading-[0.75] tracking-[-0.08em] font-semibold">
-            <HeroReveal delay={150}>Cappa</HeroReveal>
-          </h1>
+      <section className="relative z-20 h-screen w-full flex flex-col justify-start items-start px-page pt-32 snap-center bg-cream text-off-black overflow-hidden">
+        <div className="hero-name flex flex-col gap-0">
+          <HeroName delay={0}>
+            <h1 className="font-inter-tight text-[19vw] leading-[0.75] tracking-[-0.08em] font-semibold">
+              <HeroReveal delay={0}>Filippo</HeroReveal>
+            </h1>
+          </HeroName>
+          <HeroName delay={150}>
+            <h1 className="font-inter-tight text-[19vw] leading-[0.75] tracking-[-0.08em] font-semibold">
+              <HeroReveal delay={150}>Cappa</HeroReveal>
+            </h1>
+          </HeroName>
         </div>
       </section>
 
@@ -77,7 +82,7 @@ export default async function Home() {
             <Link href="/work/running-club" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_35px_-2px_rgba(243,112,33,0.6)] active:scale-95 group"
               >
                 Read case study
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -111,7 +116,7 @@ export default async function Home() {
             <Link href="/work/financial-modelling" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-500 hover:scale-105 hover:shadow-[0_0_35px_-2px_rgba(243,112,33,0.6)] active:scale-95 group"
               >
                 Read case study
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -144,7 +149,7 @@ export default async function Home() {
             <Link href="/work/econometric-analysis" className="w-fit">
               <span
                 data-cursor-magnetic
-                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_-2px_rgba(243,112,33,0.6)] active:scale-95 group"
               >
                 Read case study
                 <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -200,7 +205,7 @@ export default async function Home() {
               <a
                 href="/cv-filippo-cappa.pdf" 
                 download
-                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 active:scale-95 group"
+                className="relative z-10 inline-flex items-center gap-2 px-10 py-5 bg-accent text-off-black rounded-2xl font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_35px_-2px_rgba(243,112,33,0.6)] active:scale-95 group"
                 data-cursor-magnetic
               >
                 Download CV
