@@ -1,6 +1,7 @@
 import HeroReveal from '@/components/HeroReveal'
 import Link from 'next/link'
 import { getLatestCommitDate } from '@/lib/github'
+import ManifestoSection from '@/components/ManifestoSection'
 
 export default async function Home() {
   const commitDate = await getLatestCommitDate()
@@ -20,21 +21,7 @@ export default async function Home() {
       </section>
 
       {/* ABOUT / MANIFESTO */}
-      <section className="h-screen grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 px-page py-section snap-center bg-cream text-off-black">
-        <div className="pt-1">
-          <span className="font-geist-mono text-mono-sm">001 — About</span>
-        </div>
-        <div className="flex flex-col justify-center h-full">
-          <p className="font-inter text-manifesto font-normal leading-relaxed tracking-tight max-w-[60ch]">
-            I believe the most interesting problems sit at the intersection of
-            markets, mathematics, and human behaviour. I study economics not
-            as theory but as a lens — sharpened by data, tested by code, and
-            driven by an obsession with how systems actually work. My work
-            moves between financial modelling, community building, and the
-            quiet discipline of turning noise into signal.
-          </p>
-        </div>
-      </section>
+      <ManifestoSection />
 
       {/* SELECTED WORK — Heading and Overview */}
       <section className="h-screen flex flex-col justify-center items-start px-page py-12 snap-center bg-cream text-off-black">
