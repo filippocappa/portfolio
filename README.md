@@ -6,47 +6,51 @@ A high-performance, typography-centric personal portfolio and case study platfor
 This application serves as a digital manifesto and portfolio for Filippo Cappa. It features a sophisticated "snap-scroll" layout, custom motion sequences, and detailed case studies. The design prioritizes clarity and high-signal information, utilizing a disciplined aesthetic inspired by financial terminals and editorial design.
 
 **Key Features:**
-- **Dynamic Case Studies:** Deep dives into projects with metadata, key metrics, and methodology.
-- **Financial Aesthetics:** Integrated real-time market data visualizer (Stock Ticker).
-- **Immersive Motion:** Smooth scrolling (Lenis), hero reveals, and scroll-triggered animations (Framer Motion).
-- **Custom UI Patterns:** Bespoke cursor interactions and progress indicators.
+- **MDX-Powered Case Studies:** Content-rich project deep-dives using Markdown for flexibility and rich component embedding.
+- **Magnetic Interaction Model:** Bespoke cursor that "snaps" to interactive elements with a high-contrast accessibility mode for orange buttons.
+- **Financial Aesthetics:** Integrated real-time market data visualizer (Stock Ticker) and interactive volatility charts.
+- **Immersive Motion:** Precision snap-scrolling on the homepage and smooth scrolling (Lenis) on sub-pages, with seamless Framer Motion page transitions.
+- **Data Export Simulation:** Custom UI patterns for resume downloads styled as terminal data exports.
 
 ## 2. Architecture Breakdown
 The project is built using the **Next.js App Router**, leveraging modern React patterns for performance and SEO.
 
 - **Routing:** Uses the `/app` directory for file-system based routing, including dynamic segments for project case studies (`/work/[slug]`).
 - **Data Fetching Strategy:** 
-  - **Server Components:** Most pages are rendered as Server Components by default for optimal performance.
-  - **Static Data:** Project content is managed via a centralized TypeScript schema in `lib/projects.ts`, allowing for easy maintenance and type safety without the overhead of an external CMS.
-  - **Client-Side Interactivity:** Selective use of `'use client'` directives for motion-heavy components (Lenis, Framer Motion, and the custom Cursor).
+  - **MDX Integration:** Project content is managed via `.mdx` files in `/content/projects`, parsed with `gray-matter` and rendered using `next-mdx-remote/rsc`.
+  - **Server Components:** Most pages are rendered as Server Components for optimal performance and SEO.
+  - **Client-Side Interactivity:** Selective use of `'use client'` for motion-heavy components (Lenis, Page Transitions, Interactive Charts, and the Magnetic Cursor).
 
 ## 3. Tech Stack
 - **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Content:** [MDX](https://mdxjs.com/) with `next-mdx-remote`
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animation:** [Framer Motion](https://www.framer.com/motion/) & [Lenis](https://github.com/studio-freight/lenis) (Smooth Scroll)
-- **Typography:** Geist Mono (Monospace), Inter Tight (Headings), and Inter (Body)
+- **Animation:** [Framer Motion](https://www.framer.com/motion/) & [Lenis](https://github.com/studio-freight/react-lenis) (Smooth Scroll)
+- **Typography:** Geist Mono, Inter Tight, and Inter
 - **Linting:** ESLint
 
 ## 4. Project Structure
 ```text
 /app
-├── layout.tsx         # Root layout (Lenis provider, Cursor, Ticker)
-├── page.tsx           # Home page with snap-scroll sections
-├── globals.css        # Global styles and Tailwind directives
+├── layout.tsx         # Root layout (Cursor, StockTicker, SmoothScroll)
+├── page.tsx           # Home page with mandatory snap-scroll
 └── work
-    └── [slug]         # Dynamic Case Study engine
-        └── page.tsx   # Project detail template
+    └── [slug]         # Dynamic MDX Case Study engine
+        └── page.tsx   # Project detail template (Server Component)
 
 /components
-├── Cursor.tsx         # Custom interactive cursor
-├── HeroReveal.tsx     # Staggered typography animations
-├── ScrollReveal.tsx   # Viewport-aware content reveals
-├── SmoothScroll.tsx   # Lenis initialization
+├── Cursor.tsx         # Magnetic interactive cursor with contrast mode
+├── PageTransition.tsx # Framer Motion route transition wrapper
+├── SmoothScroll.tsx   # Conditional Lenis initialization
+├── VolatilityChart.tsx# Client-side interactive SVG data visualization
 └── StockTicker.tsx    # Marquee-style market data bar
 
+/content
+└── projects           # .mdx project files with YAML frontmatter
+
 /lib
-├── projects.ts        # Project database and data models
+├── mdx.ts             # MDX parsing and content fetching logic
 └── market.json        # Mock market data for the ticker
 ```
 
@@ -68,22 +72,11 @@ The project is built using the **Next.js App Router**, leveraging modern React p
    npm install
    ```
 
-3. **Environment Setup:**
-   *Note: Currently, no external API keys are required for the static build.*
-
-4. **Run the development server:**
+3. **Run the development server:**
    ```bash
    npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) to view the result.
-
-## 6. Deployment
-This project is optimized for deployment on **Vercel**:
-
-1. Push your code to a GitHub/GitLab/Bitbucket repository.
-2. Import the project into the Vercel Dashboard.
-3. Vercel will automatically detect Next.js and configure the build settings (`npm run build`).
-4. Deployment will be live on a production-grade edge network.
 
 ---
 Built with discipline by Filippo Cappa.
