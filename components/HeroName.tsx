@@ -3,7 +3,12 @@
 import { useState, useRef } from 'react'
 import { motion, useSpring, useMotionValue } from 'framer-motion'
 
-export default function HeroName({ children }: { children: React.ReactNode }) {
+interface HeroNameProps {
+  children: React.ReactNode
+  delay?: number
+}
+
+export default function HeroName({ children, delay }: HeroNameProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
 
