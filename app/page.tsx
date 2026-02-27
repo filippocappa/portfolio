@@ -35,20 +35,31 @@ export default function Home() {
 
       {/* SELECTED WORK — Heading and Overview */}
       <section className="h-screen flex flex-col justify-center items-start px-page py-12 snap-center bg-cream text-off-black">
-        <div className="mb-6">
+        <div className="mb-12">
           <span className="font-geist-mono text-mono-sm">002 — Selected Work</span>
         </div>
-        <div className="flex flex-col gap-4">
-          <Link href="/work/running-club" data-cursor-magnetic className="block pb-2 mb-2 border-b border-off-black/10">
-            <h2 className="font-inter-tight text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] tracking-tight font-black uppercase">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 w-full">
+          <Link href="/work/running-club" data-cursor-magnetic className="group block pb-4 border-b border-off-black/10">
+            <span className="font-geist-mono text-[10px] opacity-40 block mb-2">01 / COMMUNITY</span>
+            <h2 className="font-inter-tight text-4xl md:text-5xl lg:text-[5vw] leading-[0.85] tracking-tight font-black uppercase group-hover:text-accent transition-colors">
               The<br />Running<br />Club
             </h2>
           </Link>
-          <Link href="/work/financial-modelling" data-cursor-magnetic className="block pb-2 mb-2 border-b border-off-black/10">
-            <h2 className="font-inter-tight text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] tracking-tight font-black uppercase">
+          <Link href="/work/financial-modelling" data-cursor-magnetic className="group block pb-4 border-b border-off-black/10">
+            <span className="font-geist-mono text-[10px] opacity-40 block mb-2">02 / QUANTITATIVE</span>
+            <h2 className="font-inter-tight text-4xl md:text-5xl lg:text-[5vw] leading-[0.85] tracking-tight font-black uppercase group-hover:text-accent transition-colors">
               Financial<br />Modelling
             </h2>
           </Link>
+          <Link href="/work/econometric-analysis" data-cursor-magnetic className="group block pb-4 border-b border-off-black/10">
+            <span className="font-geist-mono text-[10px] opacity-40 block mb-2">03 / STATISTICS</span>
+            <h2 className="font-inter-tight text-4xl md:text-5xl lg:text-[5vw] leading-[0.85] tracking-tight font-black uppercase group-hover:text-accent transition-colors">
+              Econometric<br />Analysis
+            </h2>
+          </Link>
+          <div className="hidden md:flex items-end justify-end pb-4 border-b border-off-black/10 opacity-20">
+            <span className="font-geist-mono text-[10px] uppercase">End_Of_List [03]</span>
+          </div>
         </div>
       </section>
 
@@ -107,6 +118,38 @@ export default function Home() {
               and time-series forecasting using Python and R.
             </p>
             <Link href="/work/financial-modelling" className="w-fit">
+              <span
+                data-cursor-magnetic
+                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+              >
+                Read case study →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* SELECTED WORK — Panel 03 — Dark (New) */}
+      <section
+        className="h-screen block w-full snap-center bg-gray-900 text-cream border-t border-white/5"
+        data-index="03"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
+          <div className="flex flex-col justify-between h-full pt-8">
+            <span className="font-geist-mono text-mono-sm opacity-50">03</span>
+            <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
+              Econometric<br />Analysis
+            </h2>
+          </div>
+          <div className="flex flex-col justify-end gap-6 pb-20">
+            <div className="flex gap-4">
+              <span className="font-geist-mono text-mono-sm opacity-50">Stata</span>
+              <span className="font-geist-mono text-mono-sm opacity-50">R</span>
+            </div>
+            <p className="font-geist-mono text-mono-sm opacity-70 leading-relaxed max-w-[35ch]">
+              Utilised advanced statistical methods to analyse consumer behaviour and market trends during economic shifts.
+            </p>
+            <Link href="/work/econometric-analysis" className="w-fit">
               <span
                 data-cursor-magnetic
                 className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
