@@ -3,8 +3,9 @@ import { Inter_Tight, Inter, Newsreader, JetBrains_Mono } from 'next/font/google
 import './globals.css'
 import Cursor from '@/components/Cursor'
 import ScrollProgress from '@/components/ScrollProgress'
-// import SmoothScroll from '@/components/SmoothScroll' // Temporarily removed
+import SmoothScroll from '@/components/SmoothScroll'
 import StockTicker from '@/components/StockTicker'
+import PageTransition from '@/components/PageTransition'
 
 const interTight = Inter_Tight({
   subsets: ['latin'],
@@ -50,7 +51,11 @@ export default function RootLayout({
         <StockTicker />
         <ScrollProgress />
         <Cursor />
-        {children} {/* children moved outside SmoothScroll */}
+        <SmoothScroll>
+          <PageTransition>
+            {children}
+          </PageTransition>
+        </SmoothScroll>
       </body>
     </html>
   )

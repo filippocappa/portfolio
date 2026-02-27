@@ -34,18 +34,18 @@ export default function Home() {
       </section>
 
       {/* SELECTED WORK — Heading and Overview */}
-      <section className="h-screen flex flex-col justify-center items-start px-page py-section snap-center bg-cream text-off-black">
-        <div className="mb-8">
+      <section className="h-screen flex flex-col justify-center items-start px-page py-12 snap-center bg-cream text-off-black">
+        <div className="mb-6">
           <span className="font-geist-mono text-mono-sm">002 — Selected Work</span>
         </div>
-        <div className="flex flex-col gap-6">
-          <Link href="/work/running-club" className="block pb-4 mb-4 border-b border-off-black/10">
-            <h2 className="font-inter-tight text-work-title leading-[0.92] tracking-tight font-black">
+        <div className="flex flex-col gap-4">
+          <Link href="/work/running-club" data-cursor-magnetic className="block pb-2 mb-2 border-b border-off-black/10">
+            <h2 className="font-inter-tight text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] tracking-tight font-black uppercase">
               The<br />Running<br />Club
             </h2>
           </Link>
-          <Link href="/work/financial-modelling" className="block pb-4 mb-4 border-b border-off-black/10">
-            <h2 className="font-inter-tight text-work-title leading-[0.92] tracking-tight font-black">
+          <Link href="/work/financial-modelling" data-cursor-magnetic className="block pb-2 mb-2 border-b border-off-black/10">
+            <h2 className="font-inter-tight text-5xl md:text-7xl lg:text-[8vw] leading-[0.85] tracking-tight font-black uppercase">
               Financial<br />Modelling
             </h2>
           </Link>
@@ -57,10 +57,7 @@ export default function Home() {
         className="h-screen block w-full snap-center bg-cream text-off-black"
         data-index="01"
       >
-        <Link
-          href="/work/running-club"
-          className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
           <div className="flex flex-col justify-between h-full pt-8">
             <span className="font-geist-mono text-mono-sm opacity-50">01</span>
             <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
@@ -76,12 +73,16 @@ export default function Home() {
               Founded and scaled a university running community — from zero to
               weekly sessions, race logistics, and brand partnerships.
             </p>
-            <span
-              className="inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105"
-            >
-              Read case study →
-            </span>          </div>
-        </Link>
+            <Link href="/work/running-club" className="w-fit">
+              <span
+                data-cursor-magnetic
+                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+              >
+                Read case study →
+              </span>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* SELECTED WORK — Panel 02 — Dark */}
@@ -89,10 +90,7 @@ export default function Home() {
         className="h-screen block w-full snap-center bg-gray-950 text-cream"
         data-index="02"
       >
-        <Link
-          href="/work/financial-modelling"
-          className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-24 items-end h-full px-page py-20">
           <div className="flex flex-col justify-between h-full pt-8">
             <span className="font-geist-mono text-mono-sm opacity-50">02</span>
             <h2 className="font-inter-tight text-work-title font-black tracking-tight leading-[0.92]">
@@ -108,12 +106,16 @@ export default function Home() {
               Built quantitative models for portfolio optimisation, risk analysis,
               and time-series forecasting using Python and R.
             </p>
-            <span
-              className="inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold transition-all duration-300 hover:scale-105"
-            >
-              Read case study →
-            </span>          </div>
-        </Link>
+            <Link href="/work/financial-modelling" className="w-fit">
+              <span
+                data-cursor-magnetic
+                className="relative z-10 inline-block px-6 py-3 bg-accent text-off-black rounded-md font-inter-tight text-lg font-bold"
+              >
+                Read case study →
+              </span>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* CONTACT */}
@@ -135,7 +137,8 @@ export default function Home() {
           <div className="flex flex-col gap-4">
             <a
               href="mailto:hello@filippocappa.com"
-              className="font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-emerald-green hover:hover:text-emerald-green transition-all duration-300"
+              data-cursor-magnetic
+              className="relative z-10 font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-accent hover:text-accent"
             >
               hello@filippocappa.com
             </a>
@@ -143,7 +146,8 @@ export default function Home() {
               href="https://www.linkedin.com/in/filippo-cappa"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-emerald-green hover:hover:text-emerald-green transition-all duration-300"
+              data-cursor-magnetic
+              className="relative z-10 font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-accent hover:text-accent"
             >
               LinkedIn ↗
             </a>
@@ -151,10 +155,23 @@ export default function Home() {
               href="https://github.com/filippocappa"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-emerald-green hover:hover:text-emerald-green transition-all duration-300"
+              data-cursor-magnetic
+              className="relative z-10 font-geist-mono text-lg inline-block w-fit pb-[2px] border-b border-transparent hover:border-accent hover:text-accent"
             >
               GitHub ↗
             </a>
+            <div className="mt-4 pt-4 border-t border-off-black/10">
+              <a
+                href="/cv-filippo-cappa.pdf" 
+                download
+                className="relative z-10 group flex items-center gap-3 font-geist-mono text-sm px-4 py-2 bg-off-black text-cream rounded hover:bg-accent hover:text-off-black transition-all duration-300"
+                data-cursor-magnetic
+              >
+                <span className="opacity-50 group-hover:opacity-100">DATA_EXPORT:</span>
+                <span className="font-bold">DOWNLOAD_CV.PDF</span>
+                <span className="ml-auto opacity-30 group-hover:opacity-100 text-xs">↓</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>

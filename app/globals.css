@@ -12,6 +12,24 @@
     @apply antialiased;
     font-size: 16px;
     cursor: none;
+    scroll-padding-top: 2.5rem;
+  }
+
+  /* Custom Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-cream;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-off-black/10 rounded-full hover:bg-accent/50 transition-colors;
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(26, 26, 26, 0.1) transparent;
   }
 
   body {
@@ -37,10 +55,12 @@
 
   /* Custom Cursor Dot */
   .cursor-dot {
-    @apply fixed top-0 left-0 w-[10px] h-[10px] bg-accent rounded-full pointer-events-none z-[9998] opacity-0;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    @apply fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999] opacity-0;
+    will-change: transform, width, height, border-width;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.3s ease,
+                border-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
                 opacity 0.3s ease;
   }
 
@@ -49,7 +69,11 @@
   }
 
   .cursor-dot.hovering {
-    @apply w-12 h-12;
+    @apply w-12 h-12 bg-transparent border-[1.5px] border-accent;
+  }
+
+  .cursor-dot.contrast {
+    @apply border-white;
   }
 
   /* Divider */

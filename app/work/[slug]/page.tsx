@@ -1,30 +1,64 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { getProjectBySlug } from '@/lib/projects'
+import Image from 'next/image'
+import { getProjectData, getAllProjectSlugs } from '@/lib/mdx'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { VolatilityChart } from '@/components/VolatilityChart'
 
-export default function WorkPage({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug)
+// Add custom components for MDX if needed
+const components = {
+  VolatilityChart,
+  h2: ({ children }: { children: React.ReactNode }) => (
+    <h2 className="mono-sm mb-6 opacity-50">{children}</h2>
+  ),
+  p: ({ children }: { children: React.ReactNode }) => (
+    <p className="font-sans text-manifesto font-normal leading-relaxed mb-8">
+      {children}
+    </p>
+  ),
+  ul: ({ children }: { children: React.ReactNode }) => (
+    <div className="space-y-6 mb-12">
+      {children}
+    </div>
+  ),
+  li: ({ children }: { children: React.ReactNode }) => {
+    return (
+      <div className="flex gap-6">
+        <span className="mono-sm opacity-30 flex-shrink-0">→</span>
+        <p className="font-mono text-sm leading-relaxed opacity-90">{children}</p>
+      </div>
+    )
+  },
+}
+
+export async function generateStaticParams() {
+  const slugs = getAllProjectSlugs()
+  return slugs.map((slug) => ({
+    slug: slug,
+  }))
+}
+
+export default async function WorkPage({ params }: { params: { slug: string } }) {
+  const project = await getProjectData(params.slug)
 
   if (!project) {
     notFound()
   }
 
-  // const bgColor = project.theme === 'dark' ? 'bg-charcoal' : 'bg-cream'
-  // const textColor = project.theme === 'dark' ? 'text-cream' : 'text-charcoal'
-  const bgColor = project.theme === 'dark' ? 'bg-gray-950' : 'bg-cream'
-  const textColor = project.theme === 'dark' ? 'text-cream' : 'text-off-black'
-  const borderColor = project.theme === 'dark' ? 'border-cream/20' : 'border-off-black/20'
+  const { frontmatter } = project
+  const bgColor = frontmatter.theme === 'dark' ? 'bg-gray-950' : 'bg-cream'
+  const textColor = frontmatter.theme === 'dark' ? 'text-cream' : 'text-off-black'
+  const borderColor = frontmatter.theme === 'dark' ? 'border-cream/20' : 'border-off-black/20'
 
   return (
     <main className={`min-h-screen ${bgColor} ${textColor}`}>
       {/* Header */}
       <header className={`px-page py-12 border-b ${borderColor}`}>
-        {/* Removed redundant Back to Home link */}
         <h1 className="font-inter-tight text-[14vw] md:text-[10vw] font-black tracking-tighter leading-[0.9] mb-6">
-          {project.title}
+          {frontmatter.title}
         </h1>
         <p className="font-inter text-manifesto font-normal leading-relaxed max-w-[50ch] opacity-90">
-          {project.abstract}
+          {frontmatter.abstract}
         </p>
       </header>
 
@@ -38,28 +72,28 @@ export default function WorkPage({ params }: { params: { slug: string } }) {
             <div className="space-y-4">
               <div>
                 <p className="mono-sm opacity-50 mb-1">ROLE</p>
-                <p className="font-mono text-sm">{project.role}</p>
+                <p className="font-mono text-sm">{frontmatter.role}</p>
               </div>
               <div>
                 <p className="mono-sm opacity-50 mb-1">TIMELINE</p>
-                <p className="font-mono text-sm">{project.timeline}</p>
+                <p className="font-mono text-sm">{frontmatter.timeline}</p>
               </div>
               <div>
                 <p className="mono-sm opacity-50 mb-1">TECH STACK</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech, i) => (
+                  {frontmatter.techStack.map((tech, i) => (
                     <span key={i} className="mono-sm opacity-70">
                       {tech}
-                      {i < project.techStack.length - 1 ? ',' : ''}
+                      {i < frontmatter.techStack.length - 1 ? ',' : ''}
                     </span>
                   ))}
                 </div>
               </div>
-              {project.repoLink && (
+              {frontmatter.repoLink && (
                 <div>
                   <p className="mono-sm opacity-50 mb-1">REPOSITORY</p>
                   <a
-                    href={project.repoLink}
+                    href={frontmatter.repoLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-mono text-sm hover:text-accent transition-colors duration-300"
@@ -75,7 +109,7 @@ export default function WorkPage({ params }: { params: { slug: string } }) {
           <div>
             <h3 className="mono-sm mb-4 opacity-50">KEY METRICS</h3>
             <div className="space-y-4">
-              {project.stats.map((stat, i) => (
+              {frontmatter.stats.map((stat, i) => (
                 <div key={i} className={`pb-4 border-b ${borderColor}`}>
                   <p className="mono-sm opacity-50 mb-1">{stat.label.toUpperCase()}</p>
                   <p className="font-sans text-4xl font-bold tracking-tight">{stat.value}</p>
@@ -87,47 +121,35 @@ export default function WorkPage({ params }: { params: { slug: string } }) {
 
         {/* Main Content */}
         <article className="lg:col-span-8 space-y-16">
-          {/* Problem Statement */}
-          <section>
-            <h2 className="mono-sm mb-6 opacity-50">01 — PROBLEM STATEMENT</h2>
-            <p className="font-sans text-manifesto font-normal leading-relaxed">
-              {project.content.problemStatement}
-            </p>
-          </section>
+          <div className="prose prose-invert max-w-none">
+            {/* @ts-ignore */}
+            <MDXRemote source={project.content} components={components} />
+          </div>
 
-          {/* Methodology */}
-          <section>
-            <h2 className="mono-sm mb-6 opacity-50">02 — METHODOLOGY</h2>
-            <div className="space-y-6">
-              {project.content.methodology.map((item, i) => (
-                <div key={i} className="flex gap-6">
-                  <span className="mono-sm opacity-30 flex-shrink-0">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="font-mono text-sm leading-relaxed opacity-90">{item}</p>
+          {/* Image Gallery */}
+          {frontmatter.images && frontmatter.images.length > 0 && (
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h2 className="mono-sm col-span-full mb-2 opacity-50">GALLERY — CAPTURED</h2>
+              {frontmatter.images.map((src, i) => (
+                <div key={i} className={`relative overflow-hidden rounded-sm bg-off-black/5 ${i % 3 === 0 ? 'md:col-span-2 aspect-[16/9]' : 'aspect-square'}`}>
+                  <Image
+                    src={src}
+                    alt={`${frontmatter.title} - Image ${i + 1}`}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
               ))}
-            </div>
-          </section>
-
-          {/* Outcomes */}
-          <section>
-            <h2 className="mono-sm mb-6 opacity-50">03 — OUTCOMES & IMPACT</h2>
-            <div className="space-y-6">
-              {project.content.outcomes.map((item, i) => (
-                <div key={i} className="flex gap-6">
-                  <span className="text-accent text-2xl flex-shrink-0">▲</span>
-                  <p className="font-mono text-sm leading-relaxed opacity-90">{item}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+            </section>
+          )}
 
           {/* Footer CTA */}
           <section className={`pt-16 border-t ${borderColor}`}>
             <Link
               href="/"
-              className="inline-block font-sans text-2xl font-bold tracking-tight hover:text-accent transition-colors duration-300"
+              data-cursor-magnetic
+              className="inline-block font-sans text-2xl font-bold tracking-tight"
             >
               ← Back to all work
             </Link>

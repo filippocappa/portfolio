@@ -11,6 +11,7 @@ export interface Project {
     label: string
     value: string
   }>
+  images?: string[]
   content: {
     problemStatement: string
     methodology: string[]
@@ -33,6 +34,12 @@ export const projects: Project[] = [
       { label: 'Weekly Sessions', value: '3' },
       { label: 'Events Organized', value: '15+' },
       { label: 'Retention Rate', value: '85%' },
+    ],
+    images: [
+      'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=2070&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1594882645126-14020914d58d?q=80&w=2085&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?q=80&w=2074&auto=format&fit=crop',
     ],
     content: {
       problemStatement: 'University students lacked a structured, inclusive running community that balanced competitive training with social connection. Existing clubs were either too elite-focused or too casual, missing the "serious fun" middle ground.',

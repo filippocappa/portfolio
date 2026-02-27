@@ -1,9 +1,18 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Cursor() {
   const dotRef = useRef<HTMLDivElement>(null)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const dot = dotRef.current
+    if (dot) {
+      dot.classList.remove('hovering')
+    }
+  }, [pathname])
 
   useEffect(() => {
     const hasHover = window.matchMedia('(hover: hover)').matches
@@ -15,15 +24,32 @@ export default function Cursor() {
     let mx = 0, my = 0
     let dx = 0, dy = 0
     let rafId: number
-    let hovering = false
-
-    const hoverTargets = 'a, button, [data-cursor-hover]'
+    let magneticTarget: HTMLElement | null = null
 
     const handleMouseMove = (e: MouseEvent) => {
       mx = e.clientX
       my = e.clientY
+      
       if (!dot.classList.contains('visible')) {
         dot.classList.add('visible')
+      }
+
+      // Check for magnetic target under cursor
+      const target = (e.target as HTMLElement).closest('[data-cursor-magnetic]') as HTMLElement
+      if (target) {
+        magneticTarget = target
+        dot.classList.add('hovering')
+        
+        // Add contrast class if we're hovering over an orange button
+        if (target.classList.contains('bg-accent')) {
+          dot.classList.add('contrast')
+        } else {
+          dot.classList.remove('contrast')
+        }
+      } else {
+        magneticTarget = null
+        dot.classList.remove('hovering')
+        dot.classList.remove('contrast')
       }
     }
 
@@ -31,46 +57,34 @@ export default function Cursor() {
       dot.classList.remove('visible')
     }
 
-    const handleMouseOver = (e: MouseEvent) => {
-      if ((e.target as HTMLElement).closest(hoverTargets)) {
-        if (!hovering) {
-          hovering = true
-          dot.classList.add('hovering')
-        }
-      }
-    }
-
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (target.closest(hoverTargets)) {
-        const related = e.relatedTarget as HTMLElement | null
-        if (!related || !related.closest(hoverTargets)) {
-          hovering = false
-          dot.classList.remove('hovering')
-        }
-      }
-    }
-
     const tick = () => {
-      dx += (mx - dx) * 0.15
-      dy += (my - dy) * 0.15
-      dot.style.left = `${dx}px`
-      dot.style.top = `${dy}px`
+      const ease = 0.15
+      let targetX = mx
+      let targetY = my
+
+      if (magneticTarget) {
+        const rect = magneticTarget.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        
+        targetX = centerX + (mx - centerX) * 0.35
+        targetY = centerY + (my - centerY) * 0.35
+      }
+
+      dx += (targetX - dx) * ease
+      dy += (targetY - dy) * ease
+      
+      dot.style.transform = `translate3d(calc(${dx}px - 50%), calc(${dy}px - 50%), 0)`
       rafId = requestAnimationFrame(tick)
     }
 
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseleave', handleMouseLeave)
-    document.addEventListener('mouseover', handleMouseOver)
-    document.addEventListener('mouseout', handleMouseOut)
-
     rafId = requestAnimationFrame(tick)
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseleave', handleMouseLeave)
-      document.removeEventListener('mouseover', handleMouseOver)
-      document.removeEventListener('mouseout', handleMouseOut)
       cancelAnimationFrame(rafId)
     }
   }, [])
