@@ -43,16 +43,17 @@ Roen connects to Strava and reads the runner's history<Cite n="2" />. Before any
 - **Re-planning after every run.** When a run is missed, the volume is dropped rather than squeezed into the following days. When a runner reports pain, the plan opens a 72-hour protected window with lighter load before rebuilding.
 - **An explanation for every change.** Each adjustment comes with the reason behind it, in plain language.
 
-<Screen src="/work/roen-labs/roadmap.png" width="2020" height="840" alt="Roen's warning that a 3:30 marathon goal is 11.7% faster than the runner's projection, above a 16-week chart of weekly volume by phase" caption="A sample athlete aiming for 3:30 in the marathon. The goal is faster than what their runs support, so Roen says so and plans race day at a pace they can hold. Each bar is a week, coloured by phase." />
+<Screen src="/work/roen-labs/rehab.png" width="2272" height="1230" alt="Roen's rehab panel after a runner reports Achilles pain: three days of capped, easy running and the pain rule for building back" caption="What a sample athlete sees after reporting Achilles pain: three lighter days with caps on every run, and the rule for when the plan can build again." />
 
 ## Why it's built this way
 
 The planner is deterministic: the same inputs always produce the same plan, and every rule can be traced to the code that applies it. A language model reads free text, such as "my calf felt tight today", but it never makes a training decision.
 
+<Screen src="/work/roen-labs/why.png" width="1834" height="1286" alt="A marathon-pace session in Roen with its reasoning open, citing the athlete's recent training load" caption="A sample session with its reasoning open. Every session can show why it was chosen, based on the athlete's recent training load." />
+
 It's the same discipline a good valuation model needs. Assumptions are explicit, the rules can be audited, and the results can be reproduced. When I change a rule, a sweep regenerates 954 plans across every distance and level and shows what moved<Cite n="3" />.
 
 ## Where it is now
 
-<Screen src="/work/roen-labs/plan.png" width="2362" height="1051" alt="The plan page for a sample marathon runner: planned race time 3:48, 16 weeks to race, peak week 60.5 km" caption="The plan page for the same sample athlete." />
 
 The engine, API and web app are live, and a small group of runners is using it in a private alpha<Cite n="1" />. Next are race-day pace projections, fuelling guidance and sending sessions to a watch.
