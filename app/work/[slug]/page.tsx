@@ -5,7 +5,9 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import { getProjectData, getAllProjectSlugs, getAllProjects } from '@/lib/mdx'
 import { Cite, FactTable, SourceList } from '@/components/Sources'
 import FootballField from '@/components/FootballField'
+import Screen from '@/components/Screen'
 import SearchButton from '@/components/SearchButton'
+import ProjectLogo from '@/components/ProjectLogo'
 
 export async function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }))
@@ -32,6 +34,7 @@ export default async function WorkPage({ params }: { params: { slug: string } })
     // MDX props arrive as strings: next-mdx-remote strips JS expressions such as n={2}.
     Cite: ({ n }: { n: string }) => <Cite n={Number(n)} scope={slug} sources={p.sources} />,
     FootballField,
+    Screen,
   }
 
   return (
@@ -48,6 +51,7 @@ export default async function WorkPage({ params }: { params: { slug: string } })
           </nav>
 
           <div className="pt-16 pb-12">
+            {p.logo && <ProjectLogo src={p.logo} size={64} className="mb-8" />}
             <p className="font-sans text-sm font-semibold flex items-center gap-2">
               <span className="inline-block w-2 h-2 bg-accent" aria-hidden />
               {p.status}

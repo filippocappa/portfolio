@@ -22,6 +22,7 @@ export interface ProjectFrontmatter {
   status: string
   role: string
   period: string
+  logo?: string
   stack: string[]
   links?: { label: string; href: string }[]
   facts: Fact[]

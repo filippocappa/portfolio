@@ -5,6 +5,7 @@ import { FactTable, SourceList } from '@/components/Sources'
 import FootballField from '@/components/FootballField'
 import RunningLog from '@/components/RunningLog'
 import SearchButton from '@/components/SearchButton'
+import ProjectLogo from '@/components/ProjectLogo'
 
 export const revalidate = 3600
 
@@ -106,6 +107,7 @@ export default async function Home() {
         {projects.map(({ slug, frontmatter: p }) => (
           <article key={slug} className="grid lg:grid-cols-12 gap-x-8 gap-y-8 border-t-[3px] border-ink pt-6 pb-24">
             <div className="lg:col-span-4">
+              {p.logo && <ProjectLogo src={p.logo} size={44} className="mb-5" />}
               <p className="font-sans text-sm font-semibold flex items-center gap-2">
                 <span className="inline-block w-2 h-2 bg-accent" aria-hidden />
                 {p.status}
