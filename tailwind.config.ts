@@ -10,13 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         paper: 'var(--paper)',
+        surface: 'var(--surface)',
         ink: 'var(--ink)',
-        navy: 'var(--navy)',
-        'navy-deep': 'var(--navy-deep)',
         muted: 'var(--muted)',
         rule: 'var(--rule)',
-        gold: 'var(--gold)',
-        'gold-ink': 'var(--gold-ink)',
+        accent: 'var(--accent)',
       },
       fontFamily: {
         sans: ['var(--font-archivo)', 'system-ui', 'sans-serif'],

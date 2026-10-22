@@ -9,7 +9,7 @@ const METHODS = [
 
 export default function FootballField() {
   return (
-    <figure className="font-sans border border-rule bg-white/60 p-4 sm:p-6">
+    <figure className="font-sans border border-rule bg-surface p-4 sm:p-6">
       <figcaption className="flex flex-wrap items-baseline justify-between gap-2 mb-5">
         <span className="font-semibold">Valuation summary</span>
         <span className="text-sm text-muted">Implied value per share. Ranges appear once a deal is chosen.</span>
@@ -22,7 +22,7 @@ export default function FootballField() {
                 <div className="text-sm font-semibold">{m.name}</div>
                 <div className="text-xs text-muted">{m.basis}</div>
               </div>
-              <div className="hatch h-7 border border-dashed border-navy/25 flex items-center px-3">
+              <div className="hatch h-7 border border-dashed border-ink/25 flex items-center px-3">
                 <span className="text-xs text-muted">Not computed yet</span>
               </div>
             </div>
@@ -30,7 +30,7 @@ export default function FootballField() {
         </div>
       </div>
       <div className="mt-4 flex items-center gap-2 text-xs text-muted">
-        <span className="inline-block w-5 border-t-2 border-dashed border-gold-ink" aria-hidden />
+        <span className="inline-block w-5 border-t-2 border-dashed border-accent" aria-hidden />
         Offer price, marked here once the deal is chosen
       </div>
     </figure>

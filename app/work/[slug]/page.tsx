@@ -36,20 +36,20 @@ export default async function WorkPage({ params }: { params: { slug: string } })
 
   return (
     <main>
-      <header className="on-navy bg-navy text-paper">
+      <header className="border-b-[3px] border-ink">
         <div className="max-w-site mx-auto px-page">
           <nav className="flex items-center justify-between gap-6 py-5 font-sans text-sm" aria-label="Main">
-            <Link href="/" className="font-semibold hover:text-gold">Filippo Cappa</Link>
+            <Link href="/" className="font-semibold hover:text-accent">Filippo Cappa</Link>
             <div className="flex items-center gap-5 sm:gap-7">
-              <Link href="/#work" className="hover:text-gold">Work</Link>
-              <Link href="/#contact" className="hover:text-gold">Contact</Link>
-              <SearchButton className="hover:text-gold" />
+              <Link href="/#work" className="hover:text-accent">Work</Link>
+              <Link href="/#contact" className="hover:text-accent">Contact</Link>
+              <SearchButton className="hover:text-accent" />
             </div>
           </nav>
 
           <div className="pt-16 pb-12">
             <p className="font-sans text-sm font-semibold flex items-center gap-2">
-              <span className="inline-block w-2 h-2 bg-gold" aria-hidden />
+              <span className="inline-block w-2 h-2 bg-accent" aria-hidden />
               {p.status}
             </p>
             <h1 className="mt-4 font-sans condensed font-extrabold text-[clamp(3.5rem,11vw,9rem)] leading-[0.85]">
@@ -57,22 +57,22 @@ export default async function WorkPage({ params }: { params: { slug: string } })
             </h1>
             <p className="mt-8 text-lead max-w-[46ch]">{p.summary}</p>
 
-            <dl className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 border-t border-paper/25 pt-6 font-sans text-sm">
+            <dl className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 border-t border-rule pt-6 font-sans text-sm">
               <div>
-                <dt className="text-gold font-semibold">Role</dt>
-                <dd className="mt-1 text-paper/90">{p.role}</dd>
+                <dt className="text-muted font-semibold">Role</dt>
+                <dd className="mt-1">{p.role}</dd>
               </div>
               <div>
-                <dt className="text-gold font-semibold">When</dt>
-                <dd className="mt-1 text-paper/90">{p.period}</dd>
+                <dt className="text-muted font-semibold">When</dt>
+                <dd className="mt-1">{p.period}</dd>
               </div>
               <div>
-                <dt className="text-gold font-semibold">Built with</dt>
-                <dd className="mt-1 text-paper/90">{p.stack.join(', ')}</dd>
+                <dt className="text-muted font-semibold">Built with</dt>
+                <dd className="mt-1">{p.stack.join(', ')}</dd>
               </div>
               {p.links && p.links.length > 0 && (
                 <div>
-                  <dt className="text-gold font-semibold">Links</dt>
+                  <dt className="text-muted font-semibold">Links</dt>
                   <dd className="mt-1 space-y-1">
                     {p.links.map((l) => (
                       <a key={l.href} href={l.href} className="link block w-fit" target="_blank" rel="noopener noreferrer">
@@ -97,7 +97,7 @@ export default async function WorkPage({ params }: { params: { slug: string } })
 
         <article className="lg:col-span-8 lg:order-1 min-w-0">
           {slug === 'deal-autopsy' && (
-            <div className="mb-4">
+            <div className="mb-14">
               <FootballField />
             </div>
           )}
@@ -111,11 +111,11 @@ export default async function WorkPage({ params }: { params: { slug: string } })
         </article>
       </div>
 
-      <footer className="border-t-[3px] border-navy">
+      <footer className="border-t-[3px] border-ink">
         <div className="max-w-site mx-auto px-page py-12 flex flex-wrap items-end justify-between gap-6 font-sans">
           <Link href={`/work/${next.slug}`} className="group">
             <span className="block text-sm text-muted">Next project</span>
-            <span className="block condensed font-extrabold text-h2 text-navy group-hover:text-gold-ink">
+            <span className="block condensed font-extrabold text-h2 text-ink group-hover:text-accent">
               {next.frontmatter.title}
             </span>
           </Link>

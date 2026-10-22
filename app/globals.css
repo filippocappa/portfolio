@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --paper: #f5f6f8;
-  --ink: #0f1d31;
-  --navy: #15365f;
-  --navy-deep: #0e2747;
-  --muted: #566377;
-  --rule: #d3d9e2;
-  --gold: #d0a750;
-  --gold-ink: #85601a;
+  --paper: #ffffff;
+  --surface: #f5f5f5;
+  --ink: #141414;
+  --muted: #6b6b6b;
+  --rule: #e4e4e4;
+  --accent: #d7261e;
+  /* Lighter red for footnote markers on the black contact band. */
+  --accent-on-dark: #ff6a5c;
 }
 
 @layer base {
@@ -26,18 +26,18 @@
   }
 
   ::selection {
-    background: var(--gold);
-    color: var(--ink);
+    background: var(--accent);
+    color: var(--paper);
   }
 
   :focus-visible {
-    outline: 2px solid var(--gold-ink);
+    outline: 2px solid var(--ink);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  .on-navy :focus-visible {
-    outline-color: var(--gold);
+  .on-dark :focus-visible {
+    outline-color: var(--paper);
   }
 }
 
@@ -52,10 +52,10 @@
 }
 
 @layer components {
-  /* Underlined text link, gold underline that thickens on hover. */
+  /* Underlined text link, red underline that thickens on hover. */
   .link {
     text-decoration: underline;
-    text-decoration-color: var(--gold);
+    text-decoration-color: var(--accent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
     transition: text-decoration-thickness 150ms ease;
@@ -73,11 +73,11 @@
     line-height: 0;
     margin-left: 0.1em;
     padding: 0 0.15em;
-    color: var(--gold-ink);
+    color: var(--accent);
     text-decoration: none;
   }
-  .on-navy .cite {
-    color: var(--gold);
+  .on-dark .cite {
+    color: var(--accent-on-dark);
   }
   .cite:hover {
     text-decoration: underline;
@@ -88,27 +88,27 @@
     scroll-margin-top: 30vh;
   }
   .source-note:target {
-    background-color: color-mix(in srgb, var(--gold) 28%, transparent);
+    background-color: color-mix(in srgb, var(--accent) 12%, transparent);
   }
 
   /* Pending track in the valuation summary: hatched, nothing plotted yet. */
   .hatch {
     background-image: repeating-linear-gradient(
       -45deg,
-      color-mix(in srgb, var(--navy) 16%, transparent) 0 1px,
+      color-mix(in srgb, var(--ink) 14%, transparent) 0 1px,
       transparent 1px 7px
     );
   }
 
   /* Case-study prose rendered from MDX. */
   .case-prose h2 {
-    @apply font-sans condensed text-h2 font-extrabold text-navy mt-16 mb-5;
+    @apply font-sans condensed text-h2 font-extrabold text-ink mt-16 mb-5;
   }
   .case-prose p {
     @apply mb-5;
   }
   .case-prose ul {
-    @apply mb-6 pl-5 list-disc marker:text-gold-ink;
+    @apply mb-6 pl-5 list-disc marker:text-accent;
   }
   .case-prose li {
     @apply mb-2 pl-1;

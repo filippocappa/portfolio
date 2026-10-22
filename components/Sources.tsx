@@ -39,7 +39,7 @@ export function SourceList({ sources, scope }: { sources: Source[]; scope: strin
       <ol className="space-y-1">
         {sources.map((source, i) => (
           <li key={i} id={noteId(scope, i + 1)} className="source-note grid grid-cols-[1.5rem_1fr] -mx-2 px-2 py-0.5 rounded-sm">
-            <span className="tabular font-semibold text-gold-ink">{i + 1}</span>
+            <span className="tabular font-semibold text-accent">{i + 1}</span>
             <span>
               {source.href ? (
                 <a href={source.href} className="link text-ink" target="_blank" rel="noopener noreferrer">

@@ -34,15 +34,15 @@ export default async function Home() {
   return (
     <main>
       {/* Cover */}
-      <header className="on-navy bg-navy text-paper">
+      <header className="border-b-[3px] border-ink">
         <div className="max-w-site mx-auto px-page min-h-[min(92svh,64rem)] flex flex-col">
           <nav className="flex items-center justify-end sm:justify-between gap-6 py-5 font-sans text-sm" aria-label="Main">
-            <span className="hidden sm:inline text-paper/75">Turin, Italy</span>
+            <span className="hidden sm:inline text-muted">Turin, Italy</span>
             <div className="flex items-center gap-5 sm:gap-7">
-              <a href="#work" className="hover:text-gold">Work</a>
-              <a href="#about" className="hover:text-gold">About</a>
-              <a href="#contact" className="hover:text-gold">Contact</a>
-              <SearchButton className="hover:text-gold" />
+              <a href="#work" className="hover:text-accent">Work</a>
+              <a href="#about" className="hover:text-accent">About</a>
+              <a href="#contact" className="hover:text-accent">Contact</a>
+              <SearchButton className="hover:text-accent" />
             </div>
           </nav>
 
@@ -63,17 +63,17 @@ export default async function Home() {
             </div>
 
             <div className="settle">
-              <dl className="mt-12 grid gap-6 sm:grid-cols-3 border-t border-paper/25 pt-6 font-sans">
+              <dl className="mt-12 grid gap-6 sm:grid-cols-3 border-t border-rule pt-6 font-sans">
                 {PROFILE.map((row) => (
                   <div key={row.label}>
-                    <dt className="text-sm text-gold font-semibold">{row.label}</dt>
-                    <dd className="mt-1 text-[0.95rem] leading-snug text-paper/90 max-w-[34ch]">{row.value}</dd>
+                    <dt className="text-sm text-muted font-semibold">{row.label}</dt>
+                    <dd className="mt-1 text-[0.95rem] leading-snug max-w-[34ch]">{row.value}</dd>
                   </div>
                 ))}
               </dl>
 
               <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 font-sans">
-                <a href={`mailto:${EMAIL}`} className="bg-gold text-ink font-semibold px-5 py-3 rounded-[2px] hover:bg-paper">
+                <a href={`mailto:${EMAIL}`} className="bg-ink text-paper font-semibold px-5 py-3 rounded-[2px] hover:bg-accent">
                   Email me
                 </a>
                 <a href="https://www.linkedin.com/in/filippo-cappa" className="link" target="_blank" rel="noopener noreferrer">
@@ -84,8 +84,8 @@ export default async function Home() {
                 </a>
               </div>
 
-              <p className="mt-14 max-w-[52ch] font-sans text-sm text-paper/70">
-                Every figure on this site has a small gold number next to it. Select it to see where the figure comes
+              <p className="mt-14 max-w-[52ch] font-sans text-sm text-muted">
+                Every figure on this site has a small red number next to it. Select it to see where the figure comes
                 from.
               </p>
             </div>
@@ -96,7 +96,7 @@ export default async function Home() {
       {/* Work */}
       <section id="work" className="max-w-site mx-auto px-page pt-24 scroll-mt-4">
         <div className="grid lg:grid-cols-12 gap-x-8 gap-y-4 mb-16">
-          <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2 text-navy">Work</h2>
+          <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2 text-ink">Work</h2>
           <p className="lg:col-span-8 text-lead max-w-prose">
             One company, one piece of finance work, one tool I built for myself. Each started from a question I
             wanted answered properly.
@@ -104,14 +104,14 @@ export default async function Home() {
         </div>
 
         {projects.map(({ slug, frontmatter: p }) => (
-          <article key={slug} className="grid lg:grid-cols-12 gap-x-8 gap-y-8 border-t-[3px] border-navy pt-6 pb-24">
+          <article key={slug} className="grid lg:grid-cols-12 gap-x-8 gap-y-8 border-t-[3px] border-ink pt-6 pb-24">
             <div className="lg:col-span-4">
               <p className="font-sans text-sm font-semibold flex items-center gap-2">
-                <span className="inline-block w-2 h-2 bg-gold-ink" aria-hidden />
+                <span className="inline-block w-2 h-2 bg-accent" aria-hidden />
                 {p.status}
               </p>
-              <h3 className="mt-3 font-sans condensed font-extrabold text-title text-navy">
-                <Link href={`/work/${slug}`} className="hover:text-gold-ink">
+              <h3 className="mt-3 font-sans condensed font-extrabold text-title text-ink">
+                <Link href={`/work/${slug}`} className="hover:text-accent">
                   {p.title}
                 </Link>
               </h3>
@@ -138,7 +138,7 @@ export default async function Home() {
               <div className="flex flex-wrap items-center gap-x-7 gap-y-3 font-sans">
                 <Link
                   href={`/work/${slug}`}
-                  className="bg-navy text-paper font-semibold px-5 py-3 rounded-[2px] hover:bg-navy-deep"
+                  className="bg-ink text-paper font-semibold px-5 py-3 rounded-[2px] hover:bg-accent"
                 >
                   Read about {p.title}
                 </Link>
@@ -156,8 +156,8 @@ export default async function Home() {
 
       {/* About */}
       <section id="about" className="max-w-site mx-auto px-page pb-24 scroll-mt-4">
-        <div className="grid lg:grid-cols-12 gap-x-8 gap-y-8 border-t-[3px] border-navy pt-6">
-          <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2 text-navy">About</h2>
+        <div className="grid lg:grid-cols-12 gap-x-8 gap-y-8 border-t-[3px] border-ink pt-6">
+          <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2 text-ink">About</h2>
           <div className="lg:col-span-8 space-y-12">
             <div className="max-w-prose space-y-5">
               <p>
@@ -193,7 +193,7 @@ export default async function Home() {
       </section>
 
       {/* Contact */}
-      <footer id="contact" className="on-navy bg-navy text-paper scroll-mt-4">
+      <footer id="contact" className="on-dark bg-ink text-paper scroll-mt-4">
         <div className="max-w-site mx-auto px-page pt-20 pb-10">
           <div className="grid lg:grid-cols-12 gap-x-8 gap-y-6">
             <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2">Contact</h2>
@@ -203,7 +203,7 @@ export default async function Home() {
               </p>
               <a
                 href={`mailto:${EMAIL}`}
-                className="mt-8 inline-block font-sans condensed font-extrabold text-[clamp(1.75rem,6vw,4.5rem)] leading-none break-words hover:text-gold"
+                className="mt-8 inline-block font-sans condensed font-extrabold text-[clamp(1.75rem,6vw,4.5rem)] leading-none break-words hover:text-accent"
               >
                 {EMAIL}
               </a>

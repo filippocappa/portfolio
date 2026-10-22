@@ -90,10 +90,10 @@ export default function CommandPalette() {
         <div className="fixed inset-0 flex items-start justify-center px-4 pt-[15vh] z-50" role="dialog" aria-modal="true" aria-label="Search the site">
           <div
             onClick={() => setIsOpen(false)}
-            className="palette-fade absolute inset-0 bg-navy-deep/50"
+            className="palette-fade absolute inset-0 bg-ink/40"
           />
           <div
-            className="palette-drop relative w-full max-w-xl bg-paper border border-rule shadow-[0_24px_48px_-16px_rgba(14,39,71,0.45)] font-sans"
+            className="palette-drop relative w-full max-w-xl bg-paper border border-rule shadow-[0_24px_48px_-16px_rgba(0,0,0,0.35)] font-sans"
           >
             <input
               ref={inputRef}
@@ -105,7 +105,7 @@ export default function CommandPalette() {
               onKeyDown={handleKeyDown}
               placeholder="Search projects and links"
               aria-label="Search projects and links"
-              className="w-full bg-transparent px-5 py-4 text-lg outline-none border-b-2 border-navy placeholder:text-muted"
+              className="w-full bg-transparent px-5 py-4 text-lg outline-none border-b-2 border-ink placeholder:text-muted"
             />
 
             <ul className="max-h-[360px] overflow-y-auto py-2">
@@ -116,7 +116,7 @@ export default function CommandPalette() {
                     onClick={() => handleSelect(cmd)}
                     onMouseEnter={() => setActiveIndex(index)}
                     className={`px-5 py-2.5 cursor-pointer flex items-baseline justify-between gap-4 ${
-                      index === activeIndex ? 'bg-navy text-paper' : 'text-ink'
+                      index === activeIndex ? 'bg-ink text-paper' : 'text-ink'
                     }`}
                   >
                     <span className="font-medium">{cmd.label}</span>
