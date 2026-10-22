@@ -85,7 +85,7 @@ export default async function Home() {
               </div>
 
               <p className="mt-14 max-w-[52ch] font-sans text-sm text-muted">
-                Every figure on this site has a small red number next to it. Select it to see where the figure comes
+                Every figure on this site has a small blue number next to it. Select it to see where the figure comes
                 from.
               </p>
             </div>
@@ -193,7 +193,7 @@ export default async function Home() {
       </section>
 
       {/* Contact */}
-      <footer id="contact" className="on-dark bg-ink text-paper scroll-mt-4">
+      <footer id="contact" className="bg-surface border-t border-rule scroll-mt-4">
         <div className="max-w-site mx-auto px-page pt-20 pb-10">
           <div className="grid lg:grid-cols-12 gap-x-8 gap-y-6">
             <h2 className="lg:col-span-4 font-sans condensed font-extrabold text-h2">Contact</h2>
@@ -221,7 +221,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="mt-24 pt-5 border-t border-paper/20 flex flex-wrap justify-between gap-3 font-sans text-sm text-paper/65">
+          <div className="mt-24 pt-5 border-t border-rule flex flex-wrap justify-between gap-3 font-sans text-sm text-muted">
             <span>© {new Date().getFullYear()} Filippo Cappa</span>
             {commitDate && <span>Site last updated {commitDate}</span>}
           </div>

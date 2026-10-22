@@ -3,14 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --paper: #ffffff;
-  --surface: #f5f5f5;
-  --ink: #141414;
-  --muted: #6b6b6b;
-  --rule: #e4e4e4;
-  --accent: #d7261e;
-  /* Lighter red for footnote markers on the black contact band. */
-  --accent-on-dark: #ff6a5c;
+  --paper: #ededea;
+  --surface: #f7f7f5;
+  --ink: #2a2a28;
+  --muted: #62625e;
+  --rule: #d6d6d1;
+  --accent: #2f5d8a;
 }
 
 @layer base {
@@ -27,7 +25,7 @@
 
   ::selection {
     background: var(--accent);
-    color: var(--paper);
+    color: #fff;
   }
 
   :focus-visible {
@@ -36,9 +34,6 @@
     border-radius: 2px;
   }
 
-  .on-dark :focus-visible {
-    outline-color: var(--paper);
-  }
 }
 
 @layer utilities {
@@ -52,7 +47,7 @@
 }
 
 @layer components {
-  /* Underlined text link, red underline that thickens on hover. */
+  /* Underlined text link, blue underline that thickens on hover. */
   .link {
     text-decoration: underline;
     text-decoration-color: var(--accent);
@@ -75,9 +70,6 @@
     padding: 0 0.15em;
     color: var(--accent);
     text-decoration: none;
-  }
-  .on-dark .cite {
-    color: var(--accent-on-dark);
   }
   .cite:hover {
     text-decoration: underline;

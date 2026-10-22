@@ -13,22 +13,19 @@ facts:
   - label: "Stage"
     value: "Private alpha, about 15 athletes"
     cite: 1
-  - label: "Commits"
-    value: "592 in six weeks"
+  - label: "Product"
+    value: "Engine, API and web app, all live"
     cite: 2
-  - label: "Engine"
-    value: "About 31,000 lines of Python, 54 test files"
-    cite: 3
+  - label: "Decisions"
+    value: "Rule-based and reproducible. AI only reads free text"
   - label: "Regression check"
     value: "954 plans regenerated on every rule change"
-    cite: 4
+    cite: 3
 sources:
   - text: "Founder's count of invited athletes, October 2026."
-  - text: "Git history of the engine (316 commits, from 6 September 2026) and web app (276 commits, from 22 September 2026), to 17 October 2026. Both repositories are private."
-  - text: "Line and test-file count of the roenlabs_engine repository, 22 October 2026."
-  - text: "tools/sweep_event_specs.py and the engine's mathematical specification."
   - text: "Live product."
     href: "https://www.roenlabs.com"
+  - text: "tools/sweep_event_specs.py and the engine's mathematical specification. The repository is private."
 ---
 
 ## The problem
@@ -39,7 +36,7 @@ I'm one of those runners, and I wanted a plan that reacts to what actually happe
 
 ## How it works
 
-Roen connects to Strava and reads the runner's history<Cite n="5" />. Before any plan exists it answers one question honestly: is this goal realistic from where you are now? If it isn't, it says what would need to change first.
+Roen connects to Strava and reads the runner's history<Cite n="2" />. Before any plan exists it answers one question honestly: is this goal realistic from where you are now? If it isn't, it says what would need to change first.
 
 - **A plan with phases and rules.** Base, build, peak and taper, with hard limits on weekly load, long runs and how hard days are spaced. The limits are enforced by the engine, not suggested.
 - **Re-planning after every run.** When a run is missed, the volume is dropped rather than squeezed into the following days. When a runner reports pain, the plan opens a 72-hour protected window with lighter load before rebuilding.
@@ -49,7 +46,7 @@ Roen connects to Strava and reads the runner's history<Cite n="5" />. Before any
 
 The planner is deterministic: the same inputs always produce the same plan, and every rule can be traced to the code that applies it. A language model reads free text, such as "my calf felt tight today", but it never makes a training decision.
 
-It's the same discipline a good valuation model needs. Assumptions are explicit, the rules can be audited, and the results can be reproduced. When I change a rule, a sweep regenerates 954 plans across every distance and level and shows what moved<Cite n="4" />.
+It's the same discipline a good valuation model needs. Assumptions are explicit, the rules can be audited, and the results can be reproduced. When I change a rule, a sweep regenerates 954 plans across every distance and level and shows what moved<Cite n="3" />.
 
 ## Where it is now
 
