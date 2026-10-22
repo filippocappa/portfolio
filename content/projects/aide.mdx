@@ -1,0 +1,47 @@
+---
+title: "Aide"
+order: 3
+summary: "My own assistant. It runs on a computer at home, and I talk to it from an iPhone app I wrote. It handles my calendar, email, health data and university courses, and asks before doing anything that matters."
+status: "In personal use"
+role: "Built for myself"
+period: "October 2026 to now"
+stack: ["Python", "FastAPI", "Claude API", "SwiftUI", "Whisper", "Tailscale"]
+links:
+  - label: "Source on GitHub"
+    href: "https://github.com/filippocappa/aide"
+facts:
+  - label: "Commits"
+    value: "101 in the first five days"
+    cite: 1
+  - label: "Code"
+    value: "About 10,900 lines of Python and 10,900 of Swift"
+    cite: 2
+  - label: "Specialists"
+    value: "Secretary, professor, coach, finance"
+    cite: 3
+  - label: "Network"
+    value: "Private. Not reachable from the public internet"
+    cite: 3
+sources:
+  - text: "Git history, 18 to 22 October 2026."
+    href: "https://github.com/filippocappa/aide/commits/main"
+  - text: "Line count of the server and iOS app, 22 October 2026."
+  - text: "Project README."
+    href: "https://github.com/filippocappa/aide"
+---
+
+## Why I built it
+
+My schedule, email, training and study material lived in separate apps. I wanted one assistant I could talk to that worked on my own data, ran on my own machine, and never acted on its own when it mattered.
+
+## How it works
+
+A Python server runs all the time on a desktop at home. The iPhone app talks to it over a private network, so it's never exposed to the public internet<Cite n="3" />. Behind it, four specialists split the work: a secretary for calendar and email, a professor for coursework, a coach for health and habits, and one for finance.
+
+- **It asks before it acts.** Sending an email or moving an event goes into a queue, and nothing happens until I tap confirm.
+- **It studies with me.** It downloads course material from my university's portal, transcribes recorded lectures on the home computer's graphics card, and turns both into notes, flashcards and practice exams.
+- **It starts the day.** A morning briefing covers the day's calendar and when I need to leave to be on time.
+
+## Where it is now
+
+It's in personal use and still moving fast: 101 commits in its first five days<Cite n="1" />. The newest pieces are a study tab and practice exams.

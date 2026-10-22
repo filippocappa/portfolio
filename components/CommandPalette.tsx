@@ -1,17 +1,20 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import Fuse from 'fuse.js'
 
+export const OPEN_PALETTE_EVENT = 'open-command-palette'
+
 const COMMANDS = [
-  { id: 'home', label: 'Go to Home', action: '/', category: 'Navigation' },
-  { id: 'running', label: 'The Running Club', action: '/work/running-club', category: 'Project' },
-  { id: 'finance', label: 'Financial Modelling', action: '/work/financial-modelling', category: 'Project' },
-  { id: 'econometrics', label: 'Econometric Analysis', action: '/work/econometric-analysis', category: 'Project' },
-  { id: 'cv', label: 'Download CV (PDF)', action: '/cv-filippo-cappa.pdf', category: 'Action', download: true },
-  { id: 'contact', label: 'Email Me', action: 'mailto:hello@filippocappa.com', category: 'Action' },
+  { id: 'home', label: 'Home', action: '/', category: 'Page' },
+  { id: 'roen', label: 'Roen Labs', action: '/work/roen-labs', category: 'Project' },
+  { id: 'deal', label: 'Deal Autopsy', action: '/work/deal-autopsy', category: 'Project' },
+  { id: 'aide', label: 'Aide', action: '/work/aide', category: 'Project' },
+  { id: 'email', label: 'Email Filippo', action: 'mailto:hello@filippocappa.com', category: 'Contact' },
+  { id: 'linkedin', label: 'LinkedIn', action: 'https://www.linkedin.com/in/filippo-cappa', category: 'Contact' },
+  { id: 'github', label: 'GitHub', action: 'https://github.com/filippocappa', category: 'Contact' },
+  { id: 'roen-site', label: 'Open roenlabs.com', action: 'https://www.roenlabs.com', category: 'Link' },
 ]
 
 const fuse = new Fuse(COMMANDS, {
@@ -34,8 +37,13 @@ export default function CommandPalette() {
       }
       if (e.key === 'Escape') setIsOpen(false)
     }
+    const open = () => setIsOpen(true)
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+    window.addEventListener(OPEN_PALETTE_EVENT, open)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener(OPEN_PALETTE_EVENT, open)
+    }
   }, [])
 
   useEffect(() => {
@@ -46,13 +54,13 @@ export default function CommandPalette() {
     }
   }, [isOpen])
 
-  const filteredCommands = query.trim() === '' 
-    ? COMMANDS 
+  const filteredCommands = query.trim() === ''
+    ? COMMANDS
     : fuse.search(query).map(result => result.item)
 
   const handleSelect = (cmd: typeof COMMANDS[0]) => {
-    if (cmd.download) {
-      window.open(cmd.action, '_blank')
+    if (cmd.action.startsWith('http')) {
+      window.open(cmd.action, '_blank', 'noopener,noreferrer')
     } else if (cmd.action.startsWith('mailto:')) {
       window.location.href = cmd.action
     } else {
@@ -62,6 +70,7 @@ export default function CommandPalette() {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (filteredCommands.length === 0) return
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setActiveIndex((prev) => (prev + 1) % filteredCommands.length)
@@ -76,79 +85,59 @@ export default function CommandPalette() {
   }
 
   return (
-    <AnimatePresence>
+    <>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center p-4 md:p-12 z-[10000]">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+        <div className="fixed inset-0 flex items-start justify-center px-4 pt-[15vh] z-50" role="dialog" aria-modal="true" aria-label="Search the site">
+          <div
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-off-black/60 backdrop-blur-md"
+            className="palette-fade absolute inset-0 bg-navy-deep/50"
           />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.98, y: 10 }}
-            className="relative w-full max-w-2xl bg-off-black border border-white/10 rounded-xl shadow-[0_32px_64px_-12px_rgba(0,0,0,0.8)] overflow-hidden font-inter"
+          <div
+            className="palette-drop relative w-full max-w-xl bg-paper border border-rule shadow-[0_24px_48px_-16px_rgba(14,39,71,0.45)] font-sans"
           >
-            <div className="px-6 py-5 border-b border-white/5">
-              <input
-                ref={inputRef}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Search projects or actions..."
-                className="w-full bg-transparent text-cream outline-none text-xl font-light placeholder:text-cream/20"
-              />
-            </div>
-            
-            <div className="max-h-[380px] overflow-y-auto py-3">
+            <input
+              ref={inputRef}
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value)
+                setActiveIndex(0)
+              }}
+              onKeyDown={handleKeyDown}
+              placeholder="Search projects and links"
+              aria-label="Search projects and links"
+              className="w-full bg-transparent px-5 py-4 text-lg outline-none border-b-2 border-navy placeholder:text-muted"
+            />
+
+            <ul className="max-h-[360px] overflow-y-auto py-2">
               {filteredCommands.length > 0 ? (
                 filteredCommands.map((cmd, index) => (
-                  <div
+                  <li
                     key={cmd.id}
                     onClick={() => handleSelect(cmd)}
                     onMouseEnter={() => setActiveIndex(index)}
-                    className={`px-6 py-4 cursor-none flex items-center justify-between transition-all duration-200 ${
-                      index === activeIndex ? 'bg-white/10 text-cream translate-x-1' : 'text-cream/40'
+                    className={`px-5 py-2.5 cursor-pointer flex items-baseline justify-between gap-4 ${
+                      index === activeIndex ? 'bg-navy text-paper' : 'text-ink'
                     }`}
                   >
-                    <div className="flex items-center gap-6">
-                      <span className="font-geist-mono text-[10px] uppercase tracking-[0.2em] opacity-40 min-w-[80px]">
-                        {cmd.category}
-                      </span>
-                      <span className="text-base font-medium">{cmd.label}</span>
-                    </div>
-                    {index === activeIndex && (
-                      <motion.span 
-                        layoutId="enter"
-                        className="text-[10px] font-geist-mono opacity-40"
-                      >
-                        ENTER ↵
-                      </motion.span>
-                    )}
-                  </div>
+                    <span className="font-medium">{cmd.label}</span>
+                    <span className={`text-sm ${index === activeIndex ? 'text-paper/70' : 'text-muted'}`}>
+                      {cmd.category}
+                    </span>
+                  </li>
                 ))
               ) : (
-                <div className="px-6 py-12 text-center text-cream/20 text-sm font-geist-mono">
-                  NO_RESULTS_FOUND
-                </div>
+                <li className="px-5 py-8 text-muted">No matches. Try a project name, or “email”.</li>
               )}
+            </ul>
+
+            <div className="px-5 py-2.5 border-t border-rule flex gap-5 text-sm text-muted">
+              <span>Enter to open</span>
+              <span>Arrows to move</span>
+              <span>Esc to close</span>
             </div>
-            
-            <div className="px-6 py-3 bg-white/[0.02] flex justify-between items-center border-t border-white/5">
-              <span className="text-[10px] text-cream/20 font-geist-mono uppercase tracking-widest">
-                Search via Keyboard
-              </span>
-              <div className="flex gap-4 text-[10px] text-cream/20 font-geist-mono">
-                <span>ESC to close</span>
-                <span>↑↓ to navigate</span>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </div>
       )}
-    </AnimatePresence>
+    </>
   )
 }

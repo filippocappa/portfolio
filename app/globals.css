@@ -2,148 +2,181 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --paper: #f5f6f8;
+  --ink: #0f1d31;
+  --navy: #15365f;
+  --navy-deep: #0e2747;
+  --muted: #566377;
+  --rule: #d3d9e2;
+  --gold: #d0a750;
+  --gold-ink: #85601a;
+}
+
 @layer base {
-  /* Reset */
-  * {
-    @apply m-0 p-0 box-border;
-  }
-
   html {
-    @apply antialiased;
-    font-size: 16px;
-    cursor: none;
-    scroll-padding-top: 2.5rem;
-  }
-
-  /* Custom Scrollbar Styling */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-cream;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-off-black/10 rounded-full hover:bg-accent/50 transition-colors;
-  }
-  
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(26, 26, 26, 0.1) transparent;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-cream text-charcoal font-mono overflow-x-hidden;
-    cursor: none;
+    @apply bg-paper text-ink font-serif;
+    font-size: 1.125rem;
+    line-height: 1.65;
   }
 
   ::selection {
-    @apply bg-accent text-cream;
+    background: var(--gold);
+    color: var(--ink);
   }
 
-  a {
-    @apply no-underline;
-    cursor: none;
-  }
-}
-
-@layer components {
-  /* Scroll Progress Bar */
-  .scroll-progress {
-    @apply fixed top-0 left-0 h-[2px] w-0 bg-accent z-[9999];
+  :focus-visible {
+    outline: 2px solid var(--gold-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  /* Custom Cursor Dot */
-  .cursor-dot {
-    @apply fixed top-0 left-0 w-2 h-2 bg-accent rounded-full pointer-events-none z-[9999] opacity-0;
-    will-change: transform, width, height, border-width;
-    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                background-color 0.3s ease,
-                border-width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s ease;
-  }
-
-  .cursor-dot.visible {
-    @apply opacity-100;
-  }
-
-  .cursor-dot.hovering {
-    @apply w-12 h-12 bg-transparent border-[1.5px] border-accent;
-  }
-
-  .cursor-dot.contrast {
-    @apply border-white;
-  }
-
-  /* Divider */
-  .divider {
-    @apply w-full h-[1px] bg-charcoal opacity-15;
-  }
-
-  /* Mono Small Utility */
-  .mono-sm {
-    @apply font-mono text-mono-sm font-normal tracking-wider uppercase;
-  }
-
-  /* Hero Clip Reveal Animation */
-  .hero-name h1 {
-    @apply overflow-hidden pt-[0.15em] pb-[0.1em] pr-[0.1em];
-  }
-
-  .hero-name h1 .char-wrap {
-    @apply inline-block;
-    transform: translateY(105%);
-    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .hero-name h1 .char-wrap.visible {
-    transform: translateY(0);
-  }
-
-  /* Scroll Reveal */
-  .reveal {
-    @apply opacity-0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .reveal.visible {
-    @apply opacity-100;
-    transform: translateY(0);
+  .on-navy :focus-visible {
+    outline-color: var(--gold);
   }
 }
 
 @layer utilities {
-  /* Custom cursor for hover devices */
-  @media (hover: hover) {
-    html, body, a, button {
-      cursor: none;
-    }
+  .condensed {
+    font-variation-settings: 'wdth' 70;
   }
 
-  /* Restore cursor on mobile */
-  @media (max-width: 768px) {
-    html, body, a, button {
-      cursor: auto !important;
-    }
-    .cursor-dot {
-      @apply hidden;
-    }
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+@layer components {
+  /* Underlined text link, gold underline that thickens on hover. */
+  .link {
+    text-decoration: underline;
+    text-decoration-color: var(--gold);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-thickness 150ms ease;
+  }
+  .link:hover {
+    text-decoration-thickness: 3px;
   }
 
-  @keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%); /* Animate half the width of the duplicated content */
-    }
+  /* Footnote marker: a superscript number that jumps to its source note. */
+  .cite {
+    @apply font-sans tabular;
+    font-size: 0.68em;
+    font-weight: 700;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.1em;
+    padding: 0 0.15em;
+    color: var(--gold-ink);
+    text-decoration: none;
+  }
+  .on-navy .cite {
+    color: var(--gold);
+  }
+  .cite:hover {
+    text-decoration: underline;
   }
 
-  .animate-marquee {
-    animation: marquee 75s linear infinite; /* Adjusted duration */
-    width: fit-content; /* Ensure the animated content takes full width */
+  .source-note {
+    transition: background-color 600ms ease;
+    scroll-margin-top: 30vh;
+  }
+  .source-note:target {
+    background-color: color-mix(in srgb, var(--gold) 28%, transparent);
+  }
+
+  /* Pending track in the valuation summary: hatched, nothing plotted yet. */
+  .hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      color-mix(in srgb, var(--navy) 16%, transparent) 0 1px,
+      transparent 1px 7px
+    );
+  }
+
+  /* Case-study prose rendered from MDX. */
+  .case-prose h2 {
+    @apply font-sans condensed text-h2 font-extrabold text-navy mt-16 mb-5;
+  }
+  .case-prose p {
+    @apply mb-5;
+  }
+  .case-prose ul {
+    @apply mb-6 pl-5 list-disc marker:text-gold-ink;
+  }
+  .case-prose li {
+    @apply mb-2 pl-1;
+  }
+  .case-prose a {
+    @apply link;
+  }
+  .case-prose strong {
+    @apply font-semibold;
+  }
+}
+
+/* The one orchestrated moment: the name rises into place on first load. */
+@keyframes rise {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes settle {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.rise {
+  display: block;
+  animation: rise 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.settle {
+  animation: settle 700ms ease both;
+  animation-delay: 550ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise,
+  .settle {
+    animation: none;
+  }
+}
+
+.case-prose > h2:first-child {
+  margin-top: 0;
+}
+
+/* Command palette: a short fade and drop when it opens. */
+@keyframes palette-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.palette-fade {
+  animation: settle 150ms ease both;
+}
+.palette-drop {
+  animation: palette-drop 180ms ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .palette-fade,
+  .palette-drop {
+    animation: none;
   }
 }

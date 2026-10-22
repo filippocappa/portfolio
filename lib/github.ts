@@ -13,7 +13,7 @@ export async function getLatestCommitDate(repo: string = 'filippocappa/portfolio
         day: '2-digit',
         month: 'short',
         year: 'numeric'
-      }).toUpperCase()
+      })
     }
     return null
   } catch (error) {

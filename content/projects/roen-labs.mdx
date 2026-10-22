@@ -1,0 +1,56 @@
+---
+title: "Roen Labs"
+order: 1
+summary: "An adaptive training engine for road runners, from 5k to the marathon. It checks whether a goal time is realistic, builds the plan to race day, and re-plans after every run, explaining each change."
+status: "Live, private alpha"
+role: "Founder. Designed and built it alone."
+period: "September 2026 to now"
+stack: ["Python", "FastAPI", "Postgres (Supabase)", "Next.js", "Modal", "Strava API"]
+links:
+  - label: "roenlabs.com"
+    href: "https://www.roenlabs.com"
+facts:
+  - label: "Stage"
+    value: "Private alpha, about 15 athletes"
+    cite: 1
+  - label: "Commits"
+    value: "592 in six weeks"
+    cite: 2
+  - label: "Engine"
+    value: "About 31,000 lines of Python, 54 test files"
+    cite: 3
+  - label: "Regression check"
+    value: "954 plans regenerated on every rule change"
+    cite: 4
+sources:
+  - text: "Founder's count of invited athletes, October 2026."
+  - text: "Git history of the engine (316 commits, from 6 September 2026) and web app (276 commits, from 22 September 2026), to 17 October 2026. Both repositories are private."
+  - text: "Line and test-file count of the roenlabs_engine repository, 22 October 2026."
+  - text: "tools/sweep_event_specs.py and the engine's mathematical specification."
+  - text: "Live product."
+    href: "https://www.roenlabs.com"
+---
+
+## The problem
+
+Most training plans are written once and then followed. By the third week they no longer match what the runner has actually done: a missed session, a cold, a race that went better than expected. Apps accept any goal time without asking whether it's realistic, and a human coach costs more than most amateur runners will pay.
+
+I'm one of those runners, and I wanted a plan that reacts to what actually happened.
+
+## How it works
+
+Roen connects to Strava and reads the runner's history<Cite n="5" />. Before any plan exists it answers one question honestly: is this goal realistic from where you are now? If it isn't, it says what would need to change first.
+
+- **A plan with phases and rules.** Base, build, peak and taper, with hard limits on weekly load, long runs and how hard days are spaced. The limits are enforced by the engine, not suggested.
+- **Re-planning after every run.** When a run is missed, the volume is dropped rather than squeezed into the following days. When a runner reports pain, the plan opens a 72-hour protected window with lighter load before rebuilding.
+- **An explanation for every change.** Each adjustment comes with the reason behind it, in plain language.
+
+## Why it's built this way
+
+The planner is deterministic: the same inputs always produce the same plan, and every rule can be traced to the code that applies it. A language model reads free text, such as "my calf felt tight today", but it never makes a training decision.
+
+It's the same discipline a good valuation model needs. Assumptions are explicit, the rules can be audited, and the results can be reproduced. When I change a rule, a sweep regenerates 954 plans across every distance and level and shows what moved<Cite n="4" />.
+
+## Where it is now
+
+The engine, API and web app are live, and a small group of runners is using it in a private alpha<Cite n="1" />. Next are race-day pace projections, fuelling guidance and sending sessions to a watch.

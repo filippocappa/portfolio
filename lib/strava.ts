@@ -58,6 +58,7 @@ export const getActivities = async (days: number = 21) => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    next: { revalidate: 3600 },
   })
 
   if (!response.ok) {

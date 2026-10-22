@@ -1,0 +1,42 @@
+---
+title: "Deal Autopsy"
+order: 2
+summary: "Rebuilding the valuation of a real M&A deal as a banker would have done it the day before the announcement, using only information that was public then. Then checking what happened next."
+status: "In progress"
+role: "Solo project"
+period: "October 2026 to now"
+stack: ["Python", "pandas", "SciPy", "Excel"]
+facts:
+  - label: "Methods"
+    value: "Trading comparables, precedent transactions, DCF, LBO"
+    cite: 1
+  - label: "Built so far"
+    value: "The look-ahead guard and its tests"
+    cite: 2
+  - label: "Deal"
+    value: "Being selected"
+    cite: 1
+sources:
+  - text: "Project brief and architecture notes, October 2026."
+  - text: "src/deal_autopsy/data/asof.py and tests/test_asof.py. The repository is private until the first deal is published."
+---
+
+## The question
+
+Most student finance projects are a DCF template or a stock dashboard. This one starts from a single real takeover and asks something that can be argued: given what was known on the day, was the price right?
+
+## The rules
+
+**Nothing from the future.** Every data point carries the date it was published. A guard drops anything published after the cutoff, or stops the run with an error, so later restatements and hindsight can't leak into the valuation<Cite n="2" />. Only the final review step is allowed to read what came after.
+
+**Every assumption has a source.** The deal is defined in one file where each input, from the offer price to the peer group and the financing terms, is written next to the document it came from. Financials are entered by hand from annual reports and offer documents rather than pulled from data feeds that may include later revisions.
+
+## What it will produce
+
+- A valuation summary chart (a "football field") comparing four methods with the offer price.
+- An Excel model whose formulas reconcile with the Python results.
+- A short memo with a one-line verdict, and a review of how the deal turned out.
+
+## Where it is now
+
+The project structure and the look-ahead guard are built and tested. The four valuation methods come next, once the deal is chosen.

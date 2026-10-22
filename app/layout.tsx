@@ -1,39 +1,19 @@
 import type { Metadata } from 'next'
-import { Inter_Tight, Inter, Newsreader, JetBrains_Mono } from 'next/font/google'
+import { Archivo, Source_Serif_4 } from 'next/font/google'
 import './globals.css'
-import Cursor from '@/components/Cursor'
-import ScrollProgress from '@/components/ScrollProgress'
-import SmoothScroll from '@/components/SmoothScroll'
-import StockTicker from '@/components/StockTicker'
-import PageTransition from '@/components/PageTransition'
 import CommandPalette from '@/components/CommandPalette'
-import Link from 'next/link'
 
-const interTight = Inter_Tight({
+const archivo = Archivo({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '800', '900'],
-  variable: '--font-inter-tight',
+  axes: ['wdth'],
+  variable: '--font-archivo',
   display: 'swap',
 })
 
-const inter = Inter({
+const sourceSerif = Source_Serif_4({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-newsreader',
-  display: 'swap',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-jetbrains-mono',
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
   display: 'swap',
 })
 
@@ -42,7 +22,8 @@ export const metadata: Metadata = {
     default: 'Filippo Cappa',
     template: '%s | Filippo Cappa',
   },
-  description: 'Filippo Cappa — Economics with Finance & Data Science',
+  description:
+    'Economics and Finance with Data Science student at the University of Turin, aiming for investment banking. Founder of Roen Labs.',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
@@ -56,18 +37,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${interTight.variable} ${inter.variable} ${newsreader.variable} ${jetbrainsMono.variable}`}>
-      <body className="overflow-x-hidden">
-        <StockTicker />
-        <ScrollProgress />
+    <html lang="en" className={`${archivo.variable} ${sourceSerif.variable}`}>
+      <body>
         <CommandPalette />
-        <Cursor />
-
-        <SmoothScroll>
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </SmoothScroll>
+        {children}
       </body>
     </html>
   )
