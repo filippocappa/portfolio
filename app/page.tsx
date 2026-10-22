@@ -17,11 +17,11 @@ const PROFILE = [
   },
   {
     label: 'Building',
-    value: 'Roen Labs, an adaptive training engine for road runners. Founder, in private alpha.',
+    value: 'Roen Labs, an adaptive training engine for road runners. Founder since September 2026, in private alpha.',
   },
   {
     label: 'Aiming for',
-    value: "Investment banking, especially M&A, then a master's in finance.",
+    value: "Investment banking, then a master's in finance.",
   },
 ]
 

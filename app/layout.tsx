@@ -19,11 +19,11 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Filippo Cappa',
+    default: 'Filippo Cappa | Economics and Finance with Data Science student',
     template: '%s | Filippo Cappa',
   },
   description:
-    'Economics and Finance with Data Science student at the University of Turin, aiming for investment banking. Founder of Roen Labs.',
+    'Economics and Finance with Data Science student at the University of Turin, interested in investment banking.',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
